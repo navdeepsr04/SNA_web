@@ -1,23 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Home</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Similarity Measures | SNA Project</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to My Project</h1>
-        <p>Select an option below to view the resources:</p>
-        <div class="buttons">
-            <a href="YOUR_DRIVE_LINK_HERE" target="_blank" class="btn btn-drive">View/Download Presentation</a>
-            <a href="YOUR_COLAB_LINK_HERE" target="_blank" class="btn btn-colab">Demo with Code</a>
+  <header>
+    <nav>
+        <div>
+                <h2>Similarity Measures in SNA</h2>
+                <h2>by Navdeep Rathore(205124057)</h2>
         </div>
+      <ul>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#common">Common Neighbors</a></li>
+        <li><a href="#cosine">Cosine Similarity</a></li>
+        <li><a href="#jaccard">Jaccard Similarity</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section id="intro" class="section">
+    <h1>Understanding Similarity Measures</h1>
+    <p>
+      <strong>Similarity Measures</strong> are mathematical functions that quantify how alike two entities are based on their characteristics or relationships.
+      These measures are essential in <b>Social Network Analysis (SNA)</b> for identifying relationships, predicting new links, and building recommendation systems.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <h3>Key Characteristics</h3>
+        <ul>
+          <li>Produces numerical values for comparison</li>
+          <li>Indicates degree of resemblance between objects</li>
+          <li>Typically ranges from 0 (no similarity) to 1 (identical)</li>
+          <li>Foundation for recommendation algorithms</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Why Do We Need Them?</h3>
+        <ul>
+          <li><b>Recommendation Systems:</b> Netflix, Amazon, Spotify use similarity patterns.</li>
+          <li><b>Link Prediction:</b> Predict future connections like friendships or collaborations.</li>
+          <li><b>Classification Tasks:</b> Group similar data for predictive modelling.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="common" class="section">
+    <h2>Common Neighbors</h2>
+    <p>
+      The <b>Common Neighbors</b> measure calculates similarity based on the number of shared connections between two nodes.
+      It reflects how many mutual friends two people have in a network.
+    </p>
+    <div class="card">
+      <h3>Example</h3>
+      <p>
+        Nodes A connects to B and C, while D connects to C.<br/>
+        Neighbors(A) = {B, C}, Neighbors(D) = {C}<br/>
+        Common Neighbors CN(A,D) = |{C}| = 1
+      </p>
     </div>
 
-    <footer>
-        <p>© 2025 Navdeep Rathore(205124057) | MCA 2027</p>
-    </footer>
+    <div class="grid">
+      <div class="card">
+        <h3>Real-World Applications</h3>
+        <ul>
+          <li><b>Social Media:</b> “People You May Know” suggestions</li>
+          <li><b>Research Collaboration:</b> Predicting co-authorships</li>
+          <li><b>E-commerce:</b> Similar purchase recommendations</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Advantages</h3>
+        <ul>
+          <li>Simple and intuitive</li>
+          <li>Fast computation</li>
+          <li>Effective for local link prediction</li>
+          <li>Widely adopted across industries</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Limitations</h3>
+      <ul>
+        <li><b>Celebrity Problem:</b> High mutual friends don’t always mean true similarity</li>
+        <li><b>Scale Dependency:</b> Ignores relative degree importance</li>
+        <li>Fails normalization — fixed by Jaccard or Cosine methods</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cosine" class="section">
+    <h2>Cosine Similarity</h2>
+    <p>
+      <b>Cosine Similarity</b> measures how similar two nodes are based on the angle between their neighbour vectors in network space.
+      It provides a normalized measure of shared connections relative to each node’s total degree.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <h3>Geometric Intuition</h3>
+        <ul>
+          <li><b>Perfect Similarity:</b> identical neighbors → angle 0°, cosine = 1</li>
+          <li><b>No Similarity:</b> no shared neighbors → 90°, cosine = 0</li>
+          <li><b>Partial Similarity:</b> acute angle → 0 &lt; cosine &lt; 1</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Applications</h3>
+        <ul>
+          <li>Friend recommendation systems</li>
+          <li>Collaboration or citation networks</li>
+          <li>Information retrieval and document similarity</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Advantages</h3>
+      <ul>
+        <li>Degree normalization avoids bias toward high-degree nodes</li>
+        <li>Computationally efficient for large networks</li>
+        <li>Interpretable 0–1 similarity range</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Limitations</h3>
+      <ul>
+        <li>Considers only local neighborhoods</li>
+        <li>Ignores weighted edges</li>
+        <li>Does not use node attributes</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="jaccard" class="section">
+    <h2>Jaccard Similarity</h2>
+    <p>
+      <b>Jaccard Similarity</b> quantifies how similar two nodes are based on the proportion of shared neighbours to the total unique neighbours.
+      It is normalized and ideal for sparse real-world networks.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Applications</h3>
+        <ul>
+          <li>Social media friend suggestions</li>
+          <li>Link prediction in evolving networks</li>
+          <li>E-commerce recommendations</li>
+          <li>Biological network analysis</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Advantages</h3>
+        <ul>
+          <li>Handles node degree differences well</li>
+          <li>Produces interpretable normalized values (0–1)</li>
+          <li>Excellent for sparse networks</li>
+          <li>Easy to explain and implement</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Limitations</h3>
+      <ul>
+        <li>Penalizes high-degree nodes</li>
+        <li>Only captures direct neighbors</li>
+        <li>Ignores node attributes and weights</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Comparative Summary</h3>
+      <table>
+        <tr><th>Measure</th><th>Formula Basis</th><th>Normalized?</th><th>Range</th></tr>
+        <tr><td>Common Neighbors</td><td>|Γ(x) ∩ Γ(y)|</td><td>No</td><td>0–∞</td></tr>
+        <tr><td>Jaccard</td><td>|Γ(x) ∩ Γ(y)| / |Γ(x) ∪ Γ(y)|</td><td>Yes</td><td>0–1</td></tr>
+        <tr><td>Cosine</td><td>|Γ(x) ∩ Γ(y)| / √(|Γ(x)||Γ(y)|)</td><td>Yes</td><td>0–1</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="section links">
+    <h2>Explore Further</h2>
+    <div class="buttons">
+      <a href="https://drive.google.com/file/d/1R4V5V-W5axGrTXQjPegrM-ShqryS2VxZ/view?usp=share_link"
+         target="_blank" class="btn btn-drive">📂 View / Download Presentation</a>
+      <a href="https://colab.research.google.com/drive/1edD94lzyZPf9zYSg5re0-FtFAY_RaATb?usp=sharing"
+         target="_blank" class="btn btn-colab">💻 Demo with Code</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Navdeep Rathore (205124057) | MCA 2027</p>
+  </footer>
 </body>
 </html>
